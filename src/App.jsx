@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <audio ref={audioRef} src="/vibe-song.mp3" loop />
+      <audio ref={audioRef} src="/audio.mp3" loop />
 
       <AnimatePresence mode="wait">
         
