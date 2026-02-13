@@ -12,6 +12,7 @@ body, html {
   height: 100%;
   overflow: hidden; 
   font-family: 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent; /* Clean mobile experience */
 }
 
 /* 2. Main Layout Container */
@@ -44,26 +45,62 @@ body, html {
   justify-content: center;
   border: 2px solid rgba(255, 255, 255, 0.5);
   z-index: 10;
+  position: relative;
+  
+  /* FIXED: Ensures hand cursor and prevents text selection */
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease;
 }
 
-/* 4. Text Styling */
+.glass-card:hover {
+  transform: translateY(-2px);
+}
+
+/* 4. Back Button Styling */
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  color: var(--primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  z-index: 20;
+}
+
+.back-btn:active {
+  transform: scale(0.9);
+}
+
+/* 5. Text Styling */
 .glass-card h1, .glass-card h2 {
   color: var(--primary);
   margin: 0 0 1rem 0;
   line-height: 1.2;
+  font-weight: 700;
+  pointer-events: none; /* Allows clicks to pass through to card */
 }
 
 .glass-card p {
   color: #ff758f;
   font-size: 1rem;
   margin-top: 0.5rem;
+  pointer-events: none;
 }
 
-/* 5. Icon Grid & Music States */
+/* 6. Icon Grid */
 .icon-grid {
   display: flex;
-  gap: 1.5rem;
-  margin: 2rem 0;
+  gap: 3rem; 
+  margin: 2.5rem 0;
 }
 
 .icon-item {
@@ -74,12 +111,12 @@ body, html {
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   color: var(--primary);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* When music is playing */
+.icon-item:active {
+  transform: scale(0.9);
+}
+
 .icon-item.playing {
   background: var(--primary);
   color: white;
@@ -95,7 +132,7 @@ body, html {
   to { transform: rotate(360deg); }
 }
 
-/* 6. Action Buttons */
+/* 7. Action Buttons */
 .actions {
   display: flex;
   align-items: center;
@@ -103,7 +140,7 @@ body, html {
   gap: 20px;
   width: 100%;
   margin-top: 1rem;
-  position: relative; /* Context for the absolute No button */
+  position: relative;
   min-height: 80px;
 }
 
@@ -118,6 +155,11 @@ body, html {
   cursor: pointer;
   transition: transform 0.2s;
   z-index: 11;
+  box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+}
+
+.yes-btn:active {
+  transform: scale(0.95);
 }
 
 .no-btn {
@@ -131,7 +173,7 @@ body, html {
   white-space: nowrap;
 }
 
-/* 7. Animations */
+/* 8. Animations */
 .heart-beat {
   animation: beat 0.8s infinite alternate ease-in-out;
 }
